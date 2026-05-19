@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProfilesModule } from './profiles/profiles.module';
 import { DbModule } from './db/db.module';
+import { TasksService } from './tasks/tasks.service';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
-  imports: [ProfilesModule, DbModule],
+  imports: [ProfilesModule, DbModule, TasksModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TasksService],
 })
 
 export class AppModule {}

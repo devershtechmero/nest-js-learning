@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Post, Body, Put, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { CreatePofileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfilesService } from './profiles.service';
@@ -8,6 +8,7 @@ export class ProfilesController {
   constructor(private profileService: ProfilesService) { }
 
   @Get()
+  @HttpCode(HttpStatus.OK)
   findAll() {
     return this.profileService.findAll();
   }

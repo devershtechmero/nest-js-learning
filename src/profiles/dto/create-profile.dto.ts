@@ -1,5 +1,6 @@
 export class CreatePofileDto {
   id?: string;
-  name?: string;
-  description?: string;
+  name!: string;
+  email!: string;
+  password!: string;
 }

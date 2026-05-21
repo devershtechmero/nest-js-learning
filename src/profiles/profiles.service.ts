@@ -1,5 +1,4 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { randomUUID } from 'crypto';
 import { CreatePofileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
@@ -13,8 +12,6 @@ export class ProfilesService {
 
   async findAll() {
     const users = await this.db.select().from(schema.users);
-    if(users.length < 1) throw new NotFoundException('Users not found');;
-
     return users;
   }
 
@@ -31,8 +28,6 @@ export class ProfilesService {
     if(!email) return null;
 
     const user = await this.db.select().from(schema.users).where(eq(schema.users.email, email));
-    if(user.length < 1) throw new NotFoundException('User not found');
-    
     return user[0];
   }
 
@@ -41,7 +36,6 @@ export class ProfilesService {
     if(user) throw new NotFoundException('User already exists!');
 
     const createdUser = await this.db.insert(schema.users).values({
-      id: randomUUID(),
       name: createProfileDto.name,
       email: createProfileDto.email,
       password: createProfileDto.password
